@@ -8,6 +8,7 @@ def open_file():
     Function to access Excel files in Sharepoint. 
 
     follow article: https://learn.microsoft.com/en-us/answers/questions/5517764/i-am-looking-for-python-approach-to-accessing-data
+    or documentation here: https://pypi.org/project/Office365-REST-Python-Client/#Working-with-SharePoint-API
     Parameters:
     -----------
 
