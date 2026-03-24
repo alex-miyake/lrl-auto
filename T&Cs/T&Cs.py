@@ -1,21 +1,15 @@
-#import pandas as pd
-#from office365.runtime.auth.authentication_context import AuthenticationContext
-#from office365.sharepoint.client_context import ClientContext
-#from office365.sharepoint.files.file import File 
-
+import pandas as pd
 from dict import mechanic_dict, brand_dict
+from api import test_open
 
 print("hello working")
 
-def open_file():
-    # Access sharepoint
+def check_ID():
+    """
+    Function to check ID and month. 
 
-    print("connects ok I think")
-
-    # Load into pandas
-    df = "pandas df"
-    return df
-
+    Only generate T&Cs for promos with unduplicated IDs and within the month / year specified in CLI arguments. 
+    """
 
 def get_data(df):
     """
@@ -29,11 +23,12 @@ def get_data(df):
 
     """
     # Mechanic: include sample name (from LRP samples tracker), if not then just complimentary gift.
-
+    # if has strikethrough then doesnt count! 
     # Open file, bullet proof if tab name changes 
 
 
     # Data just to fill 
+
 
     # Data needed to write
     brand = "LRP" # pull 
@@ -75,14 +70,16 @@ def write_tc(mechanic, threshold, website, end_day, legal_site, s_ending, l_endi
 
 def upload_tc():
     """
-    Function that takes T&Cs and relevant fields, and populates cells for a single row
+    Function that takes T&Cs and relevant fields, and populates cells for a single row (Dates / Promo type / T&C etc.)
     """
-    # Populate T&C and other columns: Dates / Promo type / T&C etc. 
+    # Only upload if promo ID doesn't have corresponding ID in T&Cs tab. 
     return
 
 
+
 if __name__ == "__main__":
-    #df = open_file()
+    df = test_open()
+    # check ID
     # mech, thresh, wsite, e_d, v_site, s_end, l_end = get_data()
     # write_tc(mech, thresh, wsite, e_d, v_site, s_end, l_end)
     upload_tc()

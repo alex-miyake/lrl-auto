@@ -1,3 +1,9 @@
+"""
+Dictionary with set phrases based on data parsed from NPD File. 
+
+(Writing T&Cs is very formulaic, this selection should be fine for now)
+"""
+
 mechanic_dict = {
     "GWP": "",
     "% OFF": "",
