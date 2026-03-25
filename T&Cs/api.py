@@ -24,7 +24,7 @@ def open_file():
     df = "pandas df"
     return df
 
-def test_open(excel_file):
+def test_open():
     """
     Function to open local test excel file, will use for now to get main script working. 
 
@@ -35,6 +35,5 @@ def test_open(excel_file):
     --------
 
     """
-
-
-    print("opened file successfully")
+    print("fake open file successfully")
+    return
