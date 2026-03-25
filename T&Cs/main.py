@@ -1,7 +1,5 @@
-from TCs import write_tc
 from api import test_open
-from excel import check_ID, upload_tc, get_data
-
+from excel import check_ID, write_tc, upload_tc, get_data
 
 if __name__ == "__main__":
     print("hello working")

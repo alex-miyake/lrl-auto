@@ -1,3 +1,7 @@
+"""
+Functions to access NPD file on sharepoint. 
+"""
+
 import pandas as pd
 from office365.runtime.auth.authentication_context import AuthenticationContext
 from office365.sharepoint.client_context import ClientContext

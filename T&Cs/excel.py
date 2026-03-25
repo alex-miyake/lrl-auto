@@ -1,5 +1,9 @@
+"""
+Functions for actions once file has been accessed / opened.
+"""
+
 import pandas as pd
-from TCs import mechanic_dict
+from TCs import mechanic_dict, brand_dict
 
 def check_ID(df):
     """
@@ -40,6 +44,38 @@ def get_data(df):
     threshold = "when you spend £65 online" # pull 
             
     return brand, mechanic, threshold, start_date, end_date,
+
+
+def write_tc(brand, mechanic, threshold, end_date):
+    """
+    Function that writes longer T&C sections. 
+
+    Parameters:
+    -----------
+
+    Returns:
+    --------
+    """
+    if brand == "LRP":
+        website = brand_dict.get("LRP_website")
+        valid_site = brand_dict.get("LRP_valid")
+        long_ending = brand_dict.get("LRP_long_ending")
+    else: 
+        website = brand_dict.get("SKC_website")
+        valid_site = brand_dict.get("SKC_valid")
+        long_ending = brand_dict.get("SKC_long_ending")
+
+    end_day = "Until 23.45 on " + end_date # might not work
+    short_ending = brand_dict.get("Short_ending") # always same 
+
+    # Short T&C
+    long_tc = "str for now"
+    print("short T&C:\n" + mechanic, threshold, website, end_day, valid_site, short_ending)
+
+    # Long T&C
+    short_tc = "str for now"
+    print("long T&C:\n" + mechanic, threshold, website, end_day, valid_site + "\n\nT&Cs\n\nClosing date:\n" + end_day + "\n\n" + long_ending)
+    return long_tc, short_tc
 
 
 def upload_tc(df):
