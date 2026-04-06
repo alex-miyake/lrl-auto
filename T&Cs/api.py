@@ -51,7 +51,7 @@ def test_open():
     tc_df = pd.read_excel(test_path, sheet_name=1)
     ID_df.info()
     tc_df.info()
-    print(ID_df.head(5), tc_df.head(5))
+    print(ID_df.head(2), tc_df.head(2))
 
     print("test file opened successfully")
     return ID_df, tc_df

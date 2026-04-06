@@ -6,9 +6,14 @@ from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
 import pandas as pd
 from TCs import mechanic_dict, brand_dict
 
-def get_data(df):
+def get_data(df, row_no):
     """
     Function that opens NPD file, reads the Promo & GWP Status Tracker tab, and extracts relevant info 
+
+    EG of numpy for faster operations. 
+    conditions = [df['a'] < 3, df['a'] == 3, df['a'] > 3]
+    choices = ['low', 'medium', 'high']
+    df['category'] = np.select(conditions, choices)
 
     NOTES for features:
     - OPTIONAL FEATURE Mechanic: include sample name (from LRP samples tracker), if not then just complimentary gift.
@@ -22,11 +27,14 @@ def get_data(df):
     --------
 
     """
-    # Pull relevant tags 
-    brand = "LRP" # pull 
-    start_date = "01.02.2026" # pull 
-    end_date =  "01.04.2026." # pull 
-    mechanic = mechanic_dict.get("Tiered GWP") # pull 
+    # Pull tags. hardcoded row as 1 in main file for now
+    brand = df.at[row_no, 'BRAND'] 
+    print("TESTING pulled brand as:" + brand)
+    start_date = df.at[row_no, 'PLANNED GO LIVE DATE (00:00)']
+    end_date = df.at[row_no, 'PLANNED END DATE (00:00)']
+
+    # pull mechanic with regex. 
+    mechanic = "Tiered GWP"
     threshold = "when you spend £65 online" # pull 
 
     print("data pulled successfully")
@@ -35,7 +43,7 @@ def get_data(df):
 
 def write_tc(brand, mechanic, threshold, end_date):
     """
-    Function that writes longer T&C sections. 
+    Function that writes longer T&C sections. threshold not always needed. 
 
     Parameters:
     -----------
@@ -43,7 +51,7 @@ def write_tc(brand, mechanic, threshold, end_date):
     Returns:
     --------
     """
-    # brand dependent strings
+    # build brand dependent strings
     if brand == "LRP":
         website = brand_dict.get("LRP_website")
         valid_site = brand_dict.get("LRP_valid")
@@ -54,16 +62,17 @@ def write_tc(brand, mechanic, threshold, end_date):
         long_ending = brand_dict.get("SKC_long_ending")
 
     # brand independent strings
+    TC_mech = mechanic_dict.get(mechanic)
     end_day = "Until 23.45 on " + end_date 
     short_ending = brand_dict.get("Short_ending") # always same 
 
     # Short T&C
     long_tc = "str for now"
-    print("short T&C:\n" + mechanic, threshold, website, end_day, valid_site, short_ending)
+    print("short T&C:\n" + TC_mech, threshold, website, end_day, valid_site, short_ending)
 
     # Long T&C
     short_tc = "str for now"
-    print("long T&C:\n" + mechanic, threshold, website, end_day, valid_site + "\n\nT&Cs\n\nClosing date:\n" + end_day + "\n\n" + long_ending)
+    print("long T&C:\n" + TC_mech, threshold, website, end_day, valid_site + "\n\nT&Cs\n\nClosing date:\n" + end_day + "\n\n" + long_ending)
     return long_tc, short_tc
 
 
