@@ -1,11 +1,18 @@
 import win32com.client as win32
+import os
+from dotenv import load_dotenv
 
-recipients = "marco.fang@loreal.com"
+# get private info 
+load_dotenv()
+recipients = os.getenv("RECIPIENTS")
 
 def send_report(payload):
+    """
+    Function to take the filled-in report template, and draft it locally in Outlook.
+    """
     outlook = win32.Dispatch("Outlook.Application")
     email_draft = outlook.CreateItem(0)
-    email_draft.Subject = "DRAFT: D2C W13 EPOS Report"
+    email_draft.Subject = "D2C W13 EPOS Report"
     email_draft.To = recipients
     email_draft.HtmlBody = payload
     email_draft.Save()
