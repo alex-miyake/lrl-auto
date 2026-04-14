@@ -10,15 +10,11 @@ def get_data(df, row_no):
     """
     Function that opens NPD file, reads the Promo & GWP Status Tracker tab, and extracts relevant info 
 
-    EG of numpy for faster operations. 
-    conditions = [df['a'] < 3, df['a'] == 3, df['a'] > 3]
-    choices = ['low', 'medium', 'high']
-    df['category'] = np.select(conditions, choices)
+    not using numpy for now, for loop is fine as only doing operations on <100 rows
 
     NOTES for features:
-    - OPTIONAL FEATURE Mechanic: include sample name (from LRP samples tracker), if not then just complimentary gift.
+    - OPTIONAL: include sample name (from LRP samples tracker), if not then just complimentary gift.
     - if has strikethrough then doesnt count! 
-    - Bullet proof if tab name changes 
 
     Parameters: 
     -----------
@@ -93,7 +89,14 @@ def check_ID(df):
 
     Also flag if theres a mismatch, in a new column. 
 
+    use numpy to check the two arrays. 
+    EG of numpy for faster operations. 
+    conditions = [df['a'] < 3, df['a'] == 3, df['a'] > 3]
+    choices = ['low', 'medium', 'high']
+    df['category'] = np.select(conditions, choices)
+
     Only generate T&Cs for promos with unduplicated IDs and within the month / year specified in CLI arguments. 
+    also specify at end which IDs had T&Cs written. 
     """
     promo_ID = 1041
     if promo_ID >=1041:
