@@ -52,25 +52,27 @@
 <body>
 
   <!-- GREETING -->
-  <p class="intro">Hi LDB EPOS report,</p>
-  <p class="intro">Welcome to the new fully automated EPOS report!</p>
+  <p class="intro">Hi LDB!</p>
+  <p class="intro">Welcome to the newly automated EPOS report!</p>
+
+  <p class=".nb">NB: Please contact me regarding any errors noticed in this new process and format.</p>
 
   <!-- INTRO LINE -->
   <p class="intro">
     Please find below <span class="bold">D2C's {{WEEK}}, EPOS: {{D2C W SO}}
-    (<span class="red">{{D2C W YOY}}</span>)</span>
+    (<span class="{{D2C W YOY COL}}">{{D2C W YOY}}</span>)</span>
   </p>
 
   <!-- ===== SKINCEUTICALS ===== -->
   <p class="brand-name"><u>SkinCeuticals</u></p>
 
   <p class="metrics-line">
-    LW: {{SKC W SO}}, <span class="red">{{SKC W YOY}} YoY</span>
+    LW: {{SKC W SO}}, <span class="{{SKC W YOY COL}}">{{SKC W YOY}} YoY</span>
     (<span class="red">{{SKC W YOY ABS}} YoY</span>)
     <span class="green">{{SKC W FC}} vs FC</span>
   </p>
   <p class="metrics-line">
-    YTD: {{SKC YTD SO}}, <span class="red">{{SKC YTD YOY}} YoY</span>
+    YTD: {{SKC YTD SO}}, <span class="{{SKC YTD YOY COL}}">{{SKC YTD YOY}} YoY</span>
     (<span class="red">{{SKC YTD YOY ABS}} YoY</span>)
     <span class="red">{{SKC YTD FC}} vs FC</span>
   </p>

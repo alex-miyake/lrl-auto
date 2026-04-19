@@ -1,26 +1,31 @@
-import pandas as pd
 
-FILEPATH = "https://loreal-my.sharepoint.com/personal/alex_miyake_loreal_com/Documents/Documents/EPOS%20PBI%20Alex%20.xlsx?web=1"
+def decide_colour(number):
+    """
+    Decide what colour tag the YoY changes will have in html template. 
+    """
+    number = str(number)
+    if '-' in number:
+        return "red"
+    elif '+' in number:
+        return "green"
+    else:
+        return "black"
 
-def build_report(file):
+def build_report():
     """
-    Function to load EPOS tracker, read relevant data, and fill in EPOS report template. 
+    Function to read relevant data, and fill in html template report. 
     """
-    # load in html template 
+    # read html template 
     with open("template.html", "r", encoding="utf-8") as f:
         report = f.read()
 
-    # read values from EPOS tracker
-    df = pd.read_excel(FILEPATH, sheet_name="SKC Calendar")
-    print("opened EPOS tracker successfully")
-
-    # allocate values 
+    # for chat
     values = {
-        "{{WEEK}}": "",
-        "{{D2C W SO}}": "",
-        "{{D2C W YOY}}": "",
+        "{{WEEK}}": "12",
+        "{{D2C W SO}}": "5k",
+        "{{D2C W YOY}}": "-15",
         "{{SKC W SO}}": "",
-        "{{SKC W YOY}}": "",
+        "{{SKC W YOY}}": "+15%",
         "{{SKC W YOY ABS}}": "",
         "{{SKC W FC}}": "",
         "{{SKC YTD SO}}": "",
@@ -49,8 +54,17 @@ def build_report(file):
         "{{LRP whats to come}}": "", # Hardcoded
     }
 
-    # fill in template 
-    for placeholder, value in values.items():
-        report = report.replace(placeholder, value)
+    colours = {}
 
-    return report 
+    # fill in template
+    for key, value in values.items():
+        # assign colours
+        colour_key = key.replace("}}", " COL}}")
+        colours[colour_key] = decide_colour(values[key])
+
+        report = report.replace(key, value)
+        report = report.replace(colour_key, colours[colour_key])
+    
+    title = f"D2C {values['{{WEEK}}']}, EPOS Report"
+
+    return report, title
