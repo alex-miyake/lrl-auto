@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Calibri, Arial, sans-serif;
+      font-size: 14px;
+      color: #000000;
+      line-height: 1.5;
+      margin: 20px;
+    }
+    a.intro {
+      margin-bottom: 10px;
+    }
+    .nb {
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .brand-name {
+      font-weight: bold;
+      text-decoration: underline;
+      margin-top: 20px;
+      margin-bottom: 4px;
+    }
+    .metrics-line {
+      margin: 2px 0;
+    }
+    .commentary-label {
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+    ul {
+      margin-top: 4px;
+      margin-bottom: 12px;
+      padding-left: 24px;
+    }
+    ul li {
+      margin-bottom: 4px;
+    }
+    .red   { color: #C00000; font-weight: bold; }
+    .green { color: #00B050; font-weight: bold; }
+    .bold  { font-weight: bold; }
+    .divider {
+      border: none;
+      border-top: 1px solid #cccccc;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- GREETING -->
+  <p class="intro">Hi LDB EPOS report,</p>
+  <p class="intro">Welcome to the new fully automated EPOS report!</p>
+
+  <!-- INTRO LINE -->
+  <p class="intro">
+    Please find below <span class="bold">D2C's {{WEEK}}, EPOS: {{D2C W SO}}
+    (<span class="red">{{D2C W YOY}}</span>)</span>
+  </p>
+
+  <!-- ===== SKINCEUTICALS ===== -->
+  <p class="brand-name"><u>SkinCeuticals</u></p>
+
+  <p class="metrics-line">
+    LW: {{SKC W SO}}, <span class="red">{{SKC W YOY}} YoY</span>
+    (<span class="red">{{SKC W YOY ABS}} YoY</span>)
+    <span class="green">{{SKC W FC}} vs FC</span>
+  </p>
+  <p class="metrics-line">
+    YTD: {{SKC YTD SO}}, <span class="red">{{SKC YTD YOY}} YoY</span>
+    (<span class="red">{{SKC YTD YOY ABS}} YoY</span>)
+    <span class="red">{{SKC YTD FC}} vs FC</span>
+  </p>
+  <p class="metrics-line">
+    KPIs LW: Traffic <span class="green">{{SKC Traffic YOY}} YoY</span>
+    // CVR <span class="red">{{SKC CVR YOY}} YoY</span>
+    // AOV <span class="red">{{SKC AOV YOY}} YoY</span>
+  </p>
+
+  <p class="commentary-label">Commentary:</p>
+  <ul>
+    <li>{{SKC Comments}}</li>
+  </ul>
+
+  <p class="commentary-label">What's on:</p>
+  <ul>
+    <li>{{SKC whats on}}.</li>
+  </ul>
+  <p class="commentary-label">What's to come:</p>
+  <ul>
+    <li>{{SKC whats to come}}.</li>
+  </ul>
+
+  <hr class="divider">
+
+  <!-- ===== LA ROCHE POSAY ===== -->
+  <p class="brand-name"><u>La Roche Posay</u></p>
+
+  <p class="metrics-line">
+    LW: {{LRP W SO}}, <span class="red">{{LRP W YOY}} YoY</span>
+    (<span class="red">{{LRP W YOY ABS}} YoY</span>)
+    <span class="green">{{LRP W FC}} vs FC</span>
+  </p>
+  <p class="metrics-line">
+    YTD: {{LRP YTD SO}}, <span class="red">{{LRP YTD YOY}} YoY</span>
+    (<span class="red">{{LRP YTD YOY ABS}} YoY</span>)
+    <span class="red">{{LRP YTD FC}} vs FC</span>
+  </p>
+  <p class="metrics-line">
+    KPIs LW: Traffic <span class="green">{{LRP Traffic YOY}} YoY</span>
+    // CVR <span class="red">{{LRP CVR YOY}} YoY</span>
+    // AOV <span class="red">{{LRP AOV YOY}} YoY</span>
+  </p>
+
+  <p class="commentary-label">Commentary:</p>
+  <ul>
+    <li>{{LRP Comments}}</li>
+  </ul>
+
+  <p class="commentary-label">What's on:</p>
+  <ul>
+    <li>{{LRP whats on}}.</li>
+  </ul>
+  <p class="commentary-label">What's to come:</p>
+  <ul>
+    <li>{{LRP whats to come}}.</li>
+  </ul>
+
+</body>
+</html>

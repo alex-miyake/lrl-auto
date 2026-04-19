@@ -6,3 +6,4 @@ if __name__=="__main__":
     tracker = "placeholder_file.xlsx"
     payload = build_report(tracker)
     send_report(payload)
+    print("script finished successfully")
