@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <style>
     body {
-      font-family: Calibri, Arial, sans-serif;
-      font-size: 14px;
+      font-family: Aptos, Arial, sans-serif;
+      font-size: 16px;
       color: #000000;
       line-height: 1.5;
       margin: 20px;
@@ -28,16 +28,14 @@
     }
     .commentary-label {
       font-weight: bold;
-      margin-top: 10px;
-      margin-bottom: 4px;
+      margin-top: 16px;
+      margin-bottom: 0px;
     }
-    ul {
-      margin-top: 4px;
-      margin-bottom: 12px;
-      padding-left: 24px;
+    .ul {
+      margin: 0;
     }
-    ul li {
-      margin-bottom: 4px;
+    .ul li {
+      margin: 0;
     }
     .red   { color: #C00000; font-weight: bold; }
     .green { color: #00B050; font-weight: bold; }
@@ -52,9 +50,8 @@
 <body>
 
   <!-- GREETING -->
-  <p class="intro">Hi LDB!</p>
+  <p class="intro">Hi all,</p>
   <p class="intro">Welcome to the newly automated EPOS report!</p>
-
   <p class="nb">NB: Please contact me regarding any errors noticed in this new process and format.</p>
 
   <!-- INTRO LINE -->
@@ -82,17 +79,17 @@
     // AOV <span class="{{SKC AOV YOY COL}}">{{SKC AOV YOY}}</span> YoY
   </p>
 
-  <p class="commentary-label">Commentary:</p>
-  <ul>
-    <li>{{SKC Comments}}</li>
+  <div class="commentary-label" style="margin-bottom: 0;">Commentary:</div>
+  <ul style="margin: 0;">
+    <li>{{SKC Comments}}.</li>
   </ul>
 
-  <p class="commentary-label">What's on:</p>
-  <ul>
+  <p class="commentary-label" style="margin-bottom: 0;">What's on:</p>
+  <ul style="margin-top: 0;">
     <li>{{SKC whats on}}.</li>
   </ul>
-  <p class="commentary-label">What's to come:</p>
-  <ul>
+  <p class="commentary-label" style="margin-bottom: 0;">What's to come:</p>
+  <ul style="margin-top: 0;">
     <li>{{SKC whats to come}}.</li>
   </ul>
 
@@ -117,7 +114,7 @@
     // AOV <span class="{{LRP AOV YOY COL}}">{{LRP AOV YOY}}</span> YoY
   </p>
 
-  <p class="commentary-label">Commentary:</p>
+  <div class="commentary-label">Commentary:</div>
   <ul>
     <li>{{LRP Comments}}</li>
   </ul>

@@ -35,7 +35,7 @@ def build_report():
         "{{SKC Traffic YOY}}": "",
         "{{SKC CVR YOY}}": "",
         "{{SKC AOV YOY}}": "",
-        "{{SKC Comments}}": "", 
+        "{{SKC Comments}}": "comment1 comment 2", 
         "{{SKC whats on}}": "Country & TownHouse Competition and welcome GWP, Sitewide Tiered GWP", # Hardcoded
         "{{SKC whats to come}}": "", # Hardcoded
         "{{LRP W SO}}": "",
@@ -65,6 +65,6 @@ def build_report():
         report = report.replace(key, value)
         report = report.replace(colour_key, colours[colour_key])
     
-    title = f"D2C {values['{{WEEK}}']} EPOS Report"
+    title = f"D2C W{values['{{WEEK}}']} EPOS Report"
 
     return report, title
