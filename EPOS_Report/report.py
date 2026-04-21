@@ -29,8 +29,8 @@ def build_report():
         "{{SKC W YOY ABS}}": "",
         "{{SKC W FC}}": "",
         "{{SKC YTD SO}}": "",
-        "{{SKC YTD YOY}}": "",
-        "{{SKC YTD YOY ABS}}": "",
+        "{{SKC YTD YOY}}": "-4%",
+        "{{SKC YTD YOY ABS}}": "0k",
         "{{SKC YTD FC}}": "",
         "{{SKC Traffic YOY}}": "",
         "{{SKC CVR YOY}}": "",
@@ -65,6 +65,6 @@ def build_report():
         report = report.replace(key, value)
         report = report.replace(colour_key, colours[colour_key])
     
-    title = f"D2C {values['{{WEEK}}']}, EPOS Report"
+    title = f"D2C {values['{{WEEK}}']} EPOS Report"
 
     return report, title

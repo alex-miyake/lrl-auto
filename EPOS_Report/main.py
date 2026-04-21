@@ -6,3 +6,4 @@ if __name__=="__main__":
     payload, title = build_report()
     send_report(payload, title)
     print("script finished successfully")
+    
