@@ -36,8 +36,8 @@ def build_report():
         "{{SKC CVR YOY}}": "",
         "{{SKC AOV YOY}}": "",
         "{{SKC Comments}}": "comment1 comment 2", 
-        "{{SKC whats on}}": "Country & TownHouse Competition and welcome GWP, Sitewide Tiered GWP", # Hardcoded
-        "{{SKC whats to come}}": "", # Hardcoded
+        "{{SKC whats on}}": "Country & TownHouse Exclusive GWP, Sitewide Tiered AOX GWP", # Hardcoded
+        "{{SKC whats to come}}": "Payday S10% (Paid Search, 30th April), S15% Power Pair test, S15% India Knight Bundle", # Hardcoded
         "{{LRP W SO}}": "",
         "{{LRP W YOY}}": "",
         "{{LRP W YOY ABS}}": "",
@@ -50,8 +50,8 @@ def build_report():
         "{{LRP CVR YOY}}": "",
         "{{LRP AOV YOY}}": "",
         "{{LRP Comments}}": "",
-        "{{LRP whats on}}": "Sitewide Tiered GWP", # Hardcoded
-        "{{LRP whats to come}}": "", # Hardcoded
+        "{{LRP whats on}}": "S20% Total Brand, Sitewide Tiered GWP", # Hardcoded
+        "{{LRP whats to come}}": "S25% Bank Holiday Flash (4th May), S20% Total Brand (17th May)", # Hardcoded
     }
 
     colours = {}
