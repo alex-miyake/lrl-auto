@@ -22,9 +22,9 @@ def build_report():
     # for chat
     values = {
         "{{WEEK}}": "12",
-        "{{D2C W SO}}": "5k",
-        "{{D2C W YOY}}": "-15",
-        "{{SKC W SO}}": "",
+        "{{D2C W SO}}": "12345k",
+        "{{D2C W YOY}}": "-15%",
+        "{{SKC W SO}}": "12k",
         "{{SKC W YOY}}": "+15%",
         "{{SKC W YOY ABS}}": "",
         "{{SKC W FC}}": "",
