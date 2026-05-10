@@ -47,11 +47,11 @@ def test_open():
     test_path = "test_NPD_file.xlsx"
     
     # using pandas
-    ID_df = pd.read_excel(test_path, sheet_name=0, skiprows=3, header=0)
+    tracker_df = pd.read_excel(test_path, sheet_name=0, skiprows=3, header=0)
     tc_df = pd.read_excel(test_path, sheet_name=1)
-    ID_df.info()
+    tracker_df.info()
     tc_df.info()
-    print(ID_df.head(2), tc_df.head(2))
+    print(tracker_df.head(2), tc_df.head(2))
 
     print("test file opened successfully")
-    return ID_df, tc_df
+    return tracker_df, tc_df

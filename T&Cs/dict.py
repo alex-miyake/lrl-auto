@@ -5,14 +5,14 @@ Dictionary with set phrases based on data parsed from NPD File.
 """
 
 mechanic_dict = {
-    "GWP": "",
-    "% OFF": "",
+    "GWP": "Receive a travel size PRODUCT",
+    "% OFF": "Receive ",
     "Both" : "",
-    "Tiered GWP": "*Receive a complimentary gift" 
+    "Tiered GWP": "*Receive a complimentary gift"
     }
 
 brand_dict = {
-    "Short_ending" : " Incomplete, illegal, misdirected or late redemptions will not be valid. Promoter is not responsible for redemptions lost, damaged or delayed due to technical or connectivity or other problems. Subject to availability, whilst stocks last.",
+    "Short_ending" : "Incomplete, illegal, misdirected or late redemptions will not be valid. Promoter is not responsible for redemptions lost, damaged or delayed due to technical or connectivity or other problems. Subject to availability, whilst stocks last.",
     
     "LRP_website" : "at www.laroche-posay.co.uk.",
     "SKC_website" : "at www.skinceuticals.co.uk.",

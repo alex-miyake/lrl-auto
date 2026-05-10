@@ -4,15 +4,13 @@ Functions for actions once file has been accessed / opened.
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
 import pandas as pd
-from TCs import mechanic_dict, brand_dict
+from dict import mechanic_dict, brand_dict
 
-def get_data(df, row_no):
+def get_data(df):
     """
     Function that opens NPD file, reads the Promo & GWP Status Tracker tab, and extracts relevant info 
 
-    not using numpy for now, for loop is fine as only doing operations on <100 rows
-
-    NOTES for features:
+    NOTES for features: 
     - OPTIONAL: include sample name (from LRP samples tracker), if not then just complimentary gift.
     - if has strikethrough then doesnt count! 
 
@@ -23,21 +21,41 @@ def get_data(df, row_no):
     --------
 
     """
-    # Pull tags. hardcoded row as 1 in main file for now
-    brand = df.at[row_no, 'BRAND'] 
+    # Hardcoded for a single row rn
+    row_no = 0
+
+    # Pull tags 
+    ID = df.at[row_no, 'UNIQUE ID']
+    brand = df.at[row_no, 'BRAND']
+    month = df.at[row_no, 'MONTH']
+    description = df.at[row_no, 'MECHANIC']
     print("TESTING pulled brand as:" + brand)
     start_date = df.at[row_no, 'PLANNED GO LIVE DATE (00:00)']
-    end_date = df.at[row_no, 'PLANNED END DATE (00:00)']
-
-    # pull mechanic with regex. 
+    end_date = df.at[row_no, 'PLANNED END  DATE (00:00)']
+    
+    # pull mechanic with regex. read promotion type/mechanic columns
     mechanic = "Tiered GWP"
+    # if see WYS :
     threshold = "when you spend £65 online" # pull 
+    # else :
+    # threshold = "when you buy online"
+
+    # all variables in 'tags' dict, for next functions 
+    tags = {
+        "ID": ID,
+        "month": month,
+        "brand": brand,
+        "description": description,
+        "mechanic": mechanic,
+        "threshold": threshold,
+        "start_date": start_date,
+        "end_date": end_date,
+    }    
 
     print("data pulled successfully")
-    return brand, mechanic, threshold, start_date, end_date,
+    return tags
 
-
-def write_tc(brand, mechanic, threshold, end_date):
+def write_tc(tags):
     """
     Function that writes longer T&C sections. threshold not always needed. 
 
@@ -47,7 +65,16 @@ def write_tc(brand, mechanic, threshold, end_date):
     Returns:
     --------
     """
-    # build brand dependent strings
+    # extract all tags
+    brand = tags.get("brand")
+    mechanic = tags.get("mechanic")
+    threshold = tags.get("threshold")
+    end_date = tags.get("end_date")
+
+    # clean tag
+    end_date = end_date.strftime("%Y-%m-%d")
+
+    # brand dependent stuff
     if brand == "LRP":
         website = brand_dict.get("LRP_website")
         valid_site = brand_dict.get("LRP_valid")
@@ -57,30 +84,81 @@ def write_tc(brand, mechanic, threshold, end_date):
         valid_site = brand_dict.get("SKC_valid")
         long_ending = brand_dict.get("SKC_long_ending")
 
-    # brand independent strings
+    # universal stuff
     TC_mech = mechanic_dict.get(mechanic)
     end_day = "Until 23.45 on " + end_date 
-    short_ending = brand_dict.get("Short_ending") # always same 
+    short_ending = brand_dict.get("Short_ending") 
 
-    # Short T&C
-    long_tc = "str for now"
-    print("short T&C:\n" + TC_mech, threshold, website, end_day, valid_site, short_ending)
+    # Write T&Cs
+    short_tc = (f"{TC_mech} {threshold} {website} {end_day} {valid_site} {short_ending}")
+    long_tc = (
+        f"{TC_mech} {threshold} {website} {end_day} {valid_site}"
+        f"\n\nT&Cs\n\nClosing date:\n{end_day}\n\n{long_ending}")
 
-    # Long T&C
-    short_tc = "str for now"
-    print("long T&C:\n" + TC_mech, threshold, website, end_day, valid_site + "\n\nT&Cs\n\nClosing date:\n" + end_day + "\n\n" + long_ending)
-    return long_tc, short_tc
+    print("T&Cs successfully written")
+
+    # add new entries to tags dict
+    tags['long tc'] = long_tc
+    tags['short tc'] = short_tc
+
+    return tags
 
 
-def upload_tc(row):
+def upload_tc(tags):
     """
     Function that takes T&Cs and relevant fields, and populates cells for a single row (Dates / Promo type / T&C etc.)
     Only upload if promo ID doesn't have corresponding ID in T&Cs tab. 
     CHECK Numpy fastest way to apply changes to df. 
     """
-    print("upload tc empty but works!")
-    return 
+    # extract relevant tags
+    ID = tags.get("ID")
+    month = tags.get("month")
+    brand = tags.get("brand")
+    description = tags.get("description")
+    start_date = tags.get("start_date")
+    end_date = tags.get("end_date")
+    long_tc = tags.get("long tc")
+    short_tc = tags.get("short tc")
 
+    # my_df = pd.DataFrame(columns=["ID", "Month", "Brand", "start_date", "end_date", "Short T&Cs", "Long T&Cs"])
+    
+
+    # populate 1 row into new df (inefficient for now)
+    rows = []
+    rows.append({
+        "ID"        : ID,
+        "Month"     : month,
+        "Brand"     : brand,
+        "Mechanic"  : description,
+        "start_date": start_date,
+        "end_date"  : end_date, 
+        "Short T&Cs": short_tc, 
+        "Long T&Cs" : long_tc
+    })
+    my_df = pd.DataFrame(rows)
+    print(my_df.head(2))
+
+    # Excel writer
+    writer = pd.ExcelWriter(
+        path= "test_NPD_file.xlsx",
+        engine='openpyxl',
+        mode='a',                   
+        if_sheet_exists='overlay'
+    )
+    my_df.to_excel(
+        writer,
+        sheet_name="T&Cs 2026",     # USE .env file later
+        columns=["ID", "Month", "Brand", "Mechanic", "start_date", "end_date", "Short T&Cs", "Long T&Cs"],
+        header=False,
+        index=False,
+        startrow=3,          # need dynamic later  
+        startcol=0
+    )
+    # save changes
+    writer.close()
+    print("file successfully populated")
+
+    return 
 
 def check_ID(df):
     """
@@ -98,6 +176,7 @@ def check_ID(df):
     Only generate T&Cs for promos with unduplicated IDs and within the month / year specified in CLI arguments. 
     also specify at end which IDs had T&Cs written. 
     """
+    # hard coded for now
     promo_ID = 1041
     if promo_ID >=1041:
         print("ID checked")
