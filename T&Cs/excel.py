@@ -5,6 +5,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
 import pandas as pd
 from dict import mechanic_dict, brand_dict
+import os
 
 def get_data(df):
     """
@@ -32,9 +33,12 @@ def get_data(df):
     print("TESTING pulled brand as:" + brand)
     start_date = df.at[row_no, 'PLANNED GO LIVE DATE (00:00)']
     end_date = df.at[row_no, 'PLANNED END  DATE (00:00)']
-    
+    promo_type = df.at[row_no, 'PROMOTION TYPE']
+
     # pull mechanic with regex. read promotion type/mechanic columns
-    mechanic = "Tiered GWP"
+    if promo_type == "% OFF":
+        mechanic = "% OFF"
+        # threshold = 
     # if see WYS :
     threshold = "when you spend £65 online" # pull 
     # else :
@@ -103,7 +107,6 @@ def write_tc(tags):
 
     return tags
 
-
 def upload_tc(tags):
     """
     Function that takes T&Cs and relevant fields, and populates cells for a single row (Dates / Promo type / T&C etc.)
@@ -145,9 +148,10 @@ def upload_tc(tags):
         mode='a',                   
         if_sheet_exists='overlay'
     )
+    TC_TAB = os.getenv('TC_TAB')
     my_df.to_excel(
         writer,
-        sheet_name="T&Cs 2026",     # USE .env file later
+        sheet_name= TC_TAB,     # USE .env file later
         columns=["ID", "Month", "Brand", "Mechanic", "start_date", "end_date", "Short T&Cs", "Long T&Cs"],
         header=False,
         index=False,
@@ -160,24 +164,26 @@ def upload_tc(tags):
 
     return 
 
-def check_ID(df):
+def check_ID(tracker_df, tc_df):
     """
     Function to check ID and month. 
-    Only check if missing IDs for May onwards (got some mismatched ones from Jan cos silly)
-
-    Also flag if theres a mismatch, in a new column. 
-
-    use numpy to check the two arrays. 
-    EG of numpy for faster operations. 
-    conditions = [df['a'] < 3, df['a'] == 3, df['a'] > 3]
-    choices = ['low', 'medium', 'high']
-    df['category'] = np.select(conditions, choices)
+    Only check if missing IDs from Jan onwards. Flag if theres a mismatch, in a new column. 
 
     Only generate T&Cs for promos with unduplicated IDs and within the month / year specified in CLI arguments. 
     also specify at end which IDs had T&Cs written. 
     """
     # hard coded for now
-    promo_ID = 1041
-    if promo_ID >=1041:
-        print("ID checked")
-    return 
+    MONTH = os.getenv('MONTH')
+    
+    tracker_set = set(tracker_df['UNIQUE ID'])
+    tc_set = set(tc_df['UNIQUE PROMO ID'])
+
+    matches = tracker_set & tc_set
+    id_list = tracker_set - tc_set
+    error_list = tc_set - tracker_set
+
+    print("ID successfully checked:")
+    print(id_list)
+    print("mis-created IDs:")
+    print(error_list)
+    return id_list
