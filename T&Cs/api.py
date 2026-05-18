@@ -7,6 +7,7 @@ import pandas as pd
 from office365.runtime.auth.authentication_context import AuthenticationContext
 from office365.sharepoint.client_context import ClientContext
 from office365.sharepoint.files.file import File 
+import os
 
 def open_file():
     """
@@ -21,21 +22,20 @@ def open_file():
     --------
 
     """    
-    
-    # Access sharepoint
-    print("connects ok I think")
+    file_path = os.getenv('filename')
+    #file_path = r"C:\Users\"
+    #df = pd.read_excel(file_path)
+    df = "test for now"
 
-    # Load into pandas
-    df = "pandas df"
+    # Need to sort out worksheets
+
+    
+    print("connects to real NPD file successfully")
     return df
 
 def test_open():
     """
     Function to open local test excel file, will use for now to get main script working. 
-
-    Articles to follow: 
-    https://www.geeksforgeeks.org/python/formatting-cells-using-openpyxl-in-python/ 
-    https://www.geeksforgeeks.org/python/working-with-excel-spreadsheets-in-python/ 
 
     Parameters:
     -----------
