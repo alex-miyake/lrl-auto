@@ -1,23 +1,23 @@
 # Remove dummy values later
 
 values = {
-    "{{WEEK}}": "12",
-    "{{D2C W SO}}": "12345k",
-    "{{D2C W YOY}}": "-15%",
-    "{{SKC W SO}}": "12k",
-    "{{SKC W YOY}}": "+15%",
+    "{{WEEK}}": "",
+    "{{D2C W SO}}": "",
+    "{{D2C W YOY}}": "",
+    "{{SKC W SO}}": "",
+    "{{SKC W YOY}}": "",
     "{{SKC W YOY ABS}}": "",
     "{{SKC W FC}}": "",
     "{{SKC YTD SO}}": "",
-    "{{SKC YTD YOY}}": "-4%",
-    "{{SKC YTD YOY ABS}}": "0k",
+    "{{SKC YTD YOY}}": "",
+    "{{SKC YTD YOY ABS}}": "",
     "{{SKC YTD FC}}": "",
     "{{SKC Traffic YOY}}": "",
     "{{SKC CVR YOY}}": "",
     "{{SKC AOV YOY}}": "",
-    "{{SKC Comments}}": "comment1 comment 2", 
-    "{{SKC whats on}}": "Country & TownHouse Exclusive GWP, Sitewide Tiered AOX GWP", # Hardcoded
-    "{{SKC whats to come}}": "Payday S10% (Paid Search, 30th April), S15% Power Pair test, S15% India Knight Bundle", # Hardcoded
+    "{{SKC Comments}}": "", 
+    "{{SKC whats on}}": "", 
+    "{{SKC whats to come}}": "",
     "{{LRP W SO}}": "",
     "{{LRP W YOY}}": "",
     "{{LRP W YOY ABS}}": "",
@@ -30,6 +30,32 @@ values = {
     "{{LRP CVR YOY}}": "",
     "{{LRP AOV YOY}}": "",
     "{{LRP Comments}}": "",
-    "{{LRP whats on}}": "S20% Total Brand, Sitewide Tiered GWP", # Hardcoded
-    "{{LRP whats to come}}": "S25% Bank Holiday Flash (4th May), S20% Total Brand (17th May)", # Hardcoded
+    "{{LRP whats on}}": "", 
+    "{{LRP whats to come}}": "",
 }
+
+kpi_map = [
+    ('{{SKC W SO}}',        skc_df,   8,   col),   
+    ('{{SKC W YOY}}',       skc_df,  10,  col),   
+    ('{{SKC W YOY ABS}}',   skc_df,   9,  col),   
+    ('{{SKC W FC}}',        skc_df,  99,  col),   
+    ('{{SKC YTD SO}}',      skc_df,  99,  col),   
+    ('{{SKC YTD YOY}}',     skc_df,  99,  col),   
+    ('{{SKC YTD YOY ABS}}', skc_df,  99,  col), 
+    ('{{SKC YTD FC}}',      skc_df,  99,  col),   
+    ('{{SKC Traffic YOY}}', skc_df,  11,  col), 
+    ('{{SKC CVR YOY}}',     skc_df,  16,  col),  
+    ('{{SKC AOV YOY}}',     skc_df,  17,  col), 
+
+    ('{{LRP W SO}}',        lrp_df,  8,   col),  
+    ('{{LRP W YOY}}',       lrp_df,  99,  col),   
+    ('{{LRP W YOY ABS}}',   lrp_df,  99,  col),   
+    ('{{LRP W FC}}',        lrp_df,  99,  col),   
+    ('{{LRP YTD SO}}',      lrp_df,  99,  col),   
+    ('{{LRP YTD YOY}}',     lrp_df,  99,  col),   
+    ('{{LRP YTD YOY ABS}}', lrp_df,  99,  col),   
+    ('{{LRP YTD FC}}',      lrp_df,  99,  col),   
+    ('{{LRP Traffic YOY}}', lrp_df,  11,  col),   
+    ('{{LRP CVR YOY}}',     lrp_df,  16,  col),   
+    ('{{LRP AOV YOY}}',     lrp_df,  17,  col),
+]

@@ -2,6 +2,7 @@
 def decide_colour(number):
     """
     Decide what colour tag the YoY changes will have in html template. 
+    Function used in build_report function
     """
     number = str(number)
     if '-' in number:
@@ -11,7 +12,7 @@ def decide_colour(number):
     else:
         return "black"
 
-def build_report(values_dict, week_no, lrp_df, skc_df, weekly_df):
+def build_report(values_dict, week_no, kpi_map, lrp_df, skc_df, weekly_df):
     """
     Function to read relevant data, and fill in html template report. 
     """
@@ -19,16 +20,18 @@ def build_report(values_dict, week_no, lrp_df, skc_df, weekly_df):
     with open("template.html", "r", encoding="utf-8") as f:
         report = f.read()
 
-    # fill in dict
-    
-    # set up rows to KPI
-    # find week (same for both)
     week_no = int(week_no)
-    week_column = skc_df.iloc[6]
-    # for row in week:
-        # fill in dict
-
-    # round values, use K / M etc. 
+    week_row = skc_df.iloc[6]
+    matches = week_row[week_row == week_no].index.tolist()
+    # column index will be week number + 2
+    col = matches[0]
+    
+    # fill in for each brand 
+    for key, df, row, col in kpi_map:
+        values_dict = {key: str(df.iat[row,col])}
+    #values_dict['{{SKC W SO}}'] = str(skc_df.iat[8, col])
+    
+    # CLEAN DICT round values, use K / M etc. 
 
 
 
