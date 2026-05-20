@@ -11,7 +11,7 @@ def decide_colour(number):
     else:
         return "black"
 
-def build_report():
+def build_report(values_dict, week_no, lrp_df, skc_df, weekly_df):
     """
     Function to read relevant data, and fill in html template report. 
     """
@@ -19,52 +19,33 @@ def build_report():
     with open("template.html", "r", encoding="utf-8") as f:
         report = f.read()
 
-    # for chat
-    values = {
-        "{{WEEK}}": "12",
-        "{{D2C W SO}}": "12345k",
-        "{{D2C W YOY}}": "-15%",
-        "{{SKC W SO}}": "12k",
-        "{{SKC W YOY}}": "+15%",
-        "{{SKC W YOY ABS}}": "",
-        "{{SKC W FC}}": "",
-        "{{SKC YTD SO}}": "",
-        "{{SKC YTD YOY}}": "-4%",
-        "{{SKC YTD YOY ABS}}": "0k",
-        "{{SKC YTD FC}}": "",
-        "{{SKC Traffic YOY}}": "",
-        "{{SKC CVR YOY}}": "",
-        "{{SKC AOV YOY}}": "",
-        "{{SKC Comments}}": "comment1 comment 2", 
-        "{{SKC whats on}}": "Country & TownHouse Exclusive GWP, Sitewide Tiered AOX GWP", # Hardcoded
-        "{{SKC whats to come}}": "Payday S10% (Paid Search, 30th April), S15% Power Pair test, S15% India Knight Bundle", # Hardcoded
-        "{{LRP W SO}}": "",
-        "{{LRP W YOY}}": "",
-        "{{LRP W YOY ABS}}": "",
-        "{{LRP W FC}}": "",
-        "{{LRP YTD SO}}": "",
-        "{{LRP YTD YOY}}": "",
-        "{{LRP YTD YOY ABS}}": "",
-        "{{LRP YTD FC}}": "",
-        "{{LRP Traffic YOY}}": "",
-        "{{LRP CVR YOY}}": "",
-        "{{LRP AOV YOY}}": "",
-        "{{LRP Comments}}": "",
-        "{{LRP whats on}}": "S20% Total Brand, Sitewide Tiered GWP", # Hardcoded
-        "{{LRP whats to come}}": "S25% Bank Holiday Flash (4th May), S20% Total Brand (17th May)", # Hardcoded
-    }
+    # fill in dict
+    
+    # set up rows to KPI
+    # find week (same for both)
+    week_no = int(week_no)
+    week_column = skc_df.iloc[6]
+    # for row in week:
+        # fill in dict
 
+    # round values, use K / M etc. 
+
+
+
+
+
+    # 
     colours = {}
-
-    # fill in template
-    for key, value in values.items():
-        # assign colours
+    
+    for key, value in values_dict.items():
+        # setup colour dict
         colour_key = key.replace("}}", " COL}}")
-        colours[colour_key] = decide_colour(values[key])
+        colours[colour_key] = decide_colour(values_dict[key])
 
+        # fill html template
         report = report.replace(key, value)
         report = report.replace(colour_key, colours[colour_key])
     
-    title = f"D2C W{values['{{WEEK}}']} EPOS Report"
+    title = f"D2C W{values_dict['{{WEEK}}']} EPOS Report"
 
     return report, title
