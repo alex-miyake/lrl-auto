@@ -8,7 +8,7 @@ recipients = os.getenv("RECIPIENTS")
 
 def send_report(payload, title):
     """
-    Function to take the filled-in report, and draft it locally in Outlook app.
+    Function to take the filled-in report, and draft it locally in Outlook app. (Avoids API authentication issues)
     """
     outlook = win32.Dispatch("Outlook.Application")
     email_draft = outlook.CreateItem(0)

@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import sys
 
 def open_tracker():
     file_path = os.getenv('filename')
@@ -13,7 +14,24 @@ def open_tracker():
     print("opened all 3 files")
 
     # check
-    print(skc_df.head(7))
-    print(lrp_df.head(7))
-    print(weekly_df.head())
+    #print(skc_df.head(7))
+    #print(lrp_df.head(7))
+    #print(weekly_df.head())
     return lrp_df, skc_df, weekly_df
+
+def check_ytd(lrp, skc, weekly, week_no):
+    week_no = int(week_no)
+    tables = []
+    if weekly.iat[0,1] != week_no:
+        tables.append("Weekly")
+    elif lrp.iat[1,57] != week_no: 
+        tables.append("LRP Calendar")
+    elif skc.iat[1,57] != week_no:
+        tables.append("SKC Calendar")
+    if tables:
+        tables = ", ".join(tables)
+        error = f"BIG ERROR, the YTD counter in {tables} tab(s) does not match the week you entered."
+        print(error)
+        sys.exit(1)
+    
+    return 

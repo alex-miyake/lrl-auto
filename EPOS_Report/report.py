@@ -1,7 +1,7 @@
 
 def decide_colour(n):
     """
-    Decide what colour tag the YoY changes will have in html template. Function used in build_report function
+    Helper function to assign colour tags for metrics in html template. Function used in build_report function
     """
     n = str(n)
     if '-' in n:
@@ -12,6 +12,9 @@ def decide_colour(n):
         return "black"
 
 def format_percent(value):
+    """
+    Helper function to reformat % YoY evols for the final report.
+    """
     value = round(float(value) * 100)
     if value > 0:
         evol = f"+{value}%"
@@ -20,6 +23,9 @@ def format_percent(value):
     return evol
 
 def format_SO(value):
+    """
+    Helper function to round and reformat sellout values for the final report.
+    """
     value = float(value)
     if abs(value) >= 1000000:
         rounded = round(value/1000000,2)
@@ -30,6 +36,9 @@ def format_SO(value):
     return SO
 
 def format_abs(value):
+    """
+    Helper function to round and reformat sellout YoY absolute changes for the final report.
+    """
     value = float(value)
     if abs(value) >= 1000000:
         rounded = round(value/1000000,2)
@@ -39,11 +48,14 @@ def format_abs(value):
         abs_SO = f"£{rounded}K"
     if value>0:
         abs_SO = f"+{abs_SO}"
+    else:
+        abs_SO = str(abs_SO)[3:]
+        abs_SO = f"-£{abs_SO}"
     return abs_SO
 
 def build_report(values_dict, week_no, lrp_df, skc_df, weekly_df):
     """
-    Function to read relevant data, and fill in html template report. 
+    function to read relevant data, extract into the dict, and fill in html template report. 
     """
     # oepn html template 
     with open("template.html", "r", encoding="utf-8") as f:
@@ -60,8 +72,8 @@ def build_report(values_dict, week_no, lrp_df, skc_df, weekly_df):
 
     # KPI positions + formatting type (function name)
     kpi_map = [
-        ('{{D2C W SO}}',        weekly_df,   4,   1, format_SO),
-        ('{{D2C W YOY}}',       weekly_df,   4,   3, format_percent),
+        ('{{D2C W SO}}',        weekly_df,   14,   2, format_SO),
+        ('{{D2C W YOY}}',       weekly_df,   14,   3, format_percent),
         ('{{SKC W YOY ABS}}',   weekly_df,   13,  4, format_abs), 
         ('{{LRP W YOY ABS}}',   weekly_df,  12,  4, format_abs),   
         ('{{SKC YTD YOY ABS}}', weekly_df,  3,  4, format_abs),
