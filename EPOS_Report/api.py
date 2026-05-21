@@ -9,7 +9,7 @@ def open_tracker():
         
     skc_df = pd.read_excel(file_path, sheet_name='SKC Calendar', header=None, usecols="A:BZ",nrows=119)
     lrp_df = pd.read_excel(file_path, sheet_name='LRP Calendar', header=None, usecols="A:BZ",nrows=119)
-    weekly_df = pd.read_excel(file_path, sheet_name='Weekly', header=None, usecols="A:E",nrows=4)
+    weekly_df = pd.read_excel(file_path, sheet_name='Weekly', header=None, usecols="A:H",nrows=15)
     print("opened all 3 files")
 
     # check

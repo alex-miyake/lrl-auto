@@ -33,29 +33,3 @@ values = {
     "{{LRP whats on}}": "", 
     "{{LRP whats to come}}": "",
 }
-
-kpi_map = [
-    ('{{SKC W SO}}',        skc_df,   8,   col),   
-    ('{{SKC W YOY}}',       skc_df,  10,  col),   
-    ('{{SKC W YOY ABS}}',   skc_df,   9,  col),   
-    ('{{SKC W FC}}',        skc_df,  99,  col),   
-    ('{{SKC YTD SO}}',      skc_df,  99,  col),   
-    ('{{SKC YTD YOY}}',     skc_df,  99,  col),   
-    ('{{SKC YTD YOY ABS}}', skc_df,  99,  col), 
-    ('{{SKC YTD FC}}',      skc_df,  99,  col),   
-    ('{{SKC Traffic YOY}}', skc_df,  11,  col), 
-    ('{{SKC CVR YOY}}',     skc_df,  16,  col),  
-    ('{{SKC AOV YOY}}',     skc_df,  17,  col), 
-
-    ('{{LRP W SO}}',        lrp_df,  8,   col),  
-    ('{{LRP W YOY}}',       lrp_df,  99,  col),   
-    ('{{LRP W YOY ABS}}',   lrp_df,  99,  col),   
-    ('{{LRP W FC}}',        lrp_df,  99,  col),   
-    ('{{LRP YTD SO}}',      lrp_df,  99,  col),   
-    ('{{LRP YTD YOY}}',     lrp_df,  99,  col),   
-    ('{{LRP YTD YOY ABS}}', lrp_df,  99,  col),   
-    ('{{LRP YTD FC}}',      lrp_df,  99,  col),   
-    ('{{LRP Traffic YOY}}', lrp_df,  11,  col),   
-    ('{{LRP CVR YOY}}',     lrp_df,  16,  col),   
-    ('{{LRP AOV YOY}}',     lrp_df,  17,  col),
-]
