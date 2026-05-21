@@ -13,7 +13,7 @@ def open_tracker():
     print("opened all 3 files")
 
     # check
-    print(skc_df.head(10))
-    print(lrp_df.head(10))
+    print(skc_df.head(7))
+    print(lrp_df.head(7))
     print(weekly_df.head())
     return lrp_df, skc_df, weekly_df
