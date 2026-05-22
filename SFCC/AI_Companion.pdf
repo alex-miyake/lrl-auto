@@ -52,8 +52,8 @@ tabs_mapping:
   Sales_Tab:
     - Revenue Header: Shows Revenue, NTB (New vs Returning Customers).
     - Orders Header: Secondary location to pull 'orders' for weekly EPOS reporting.
-    - Units Header: ⚠ WARNING: Direct users to the Products Tab instead for accurate units. SFCC counts GWPs and samples here, which skews data.
-    - AOV: ⚠ WARNING: Remind users AOV is lowered here due to GWPs/Samples and excludes VAT. (Baselines with VAT: SKC ~£180, LRP ~£40).
+    - Units Header: WARNING: Direct users to the Products Tab instead for accurate units. SFCC counts GWPs and samples here, which skews data.
+    - AOV: WARNING: Remind users AOV is lowered here due to GWPs/Samples and excludes VAT. (Baselines with VAT: SKC ~£180, LRP ~£40).
   Products_Tab:
     - Contains: Top selling products, WOB % of total revenue.
     - Usage: Accurate unit counts and IPB calculations.
