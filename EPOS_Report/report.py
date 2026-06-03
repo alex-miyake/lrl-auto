@@ -40,16 +40,20 @@ def format_abs(value):
     Helper function to round and reformat sellout YoY absolute changes for the final report.
     """
     value = float(value)
-    if abs(value) >= 1000000:
-        rounded = round(value/1000000,2)
-        abs_SO = f"£{rounded}M"
+    abs_value = abs(value)
+
+    # rounding
+    if abs_value >= 1000000:
+        rounded = round(abs_value/1000000,2)
+        abs_SO = f"{rounded}M"
     else:
-        rounded = round(value/1000)
-        abs_SO = f"£{rounded}K"
+        rounded = round(abs_value/1000)
+        abs_SO = f"{rounded}K"
+
+    # +/- sign
     if value>0:
         abs_SO = f"+{abs_SO}"
     else:
-        abs_SO = str(abs_SO)[3:]
         abs_SO = f"-£{abs_SO}"
     return abs_SO
 
@@ -72,10 +76,10 @@ def build_report(values_dict, week_no, lrp_df, skc_df, weekly_df):
 
     # KPI positions + formatting type (function name)
     kpi_map = [
-        ('{{D2C W SO}}',        weekly_df,   14,   2, format_SO),
-        ('{{D2C W YOY}}',       weekly_df,   14,   3, format_percent),
-        ('{{SKC W YOY ABS}}',   weekly_df,   13,  4, format_abs), 
-        ('{{LRP W YOY ABS}}',   weekly_df,  12,  4, format_abs),   
+        ('{{D2C W SO}}',        weekly_df,    4,   5, format_SO),
+        ('{{D2C W YOY}}',       weekly_df,    4,   7, format_percent),
+        ('{{SKC W YOY ABS}}',   weekly_df,    3,  8, format_abs), 
+        ('{{LRP W YOY ABS}}',   weekly_df,    2,  8, format_abs),   
         ('{{SKC YTD YOY ABS}}', weekly_df,  3,  4, format_abs),
         ('{{LRP YTD YOY ABS}}', weekly_df,  2,  4, format_abs), 
         
