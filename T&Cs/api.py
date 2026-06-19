@@ -44,13 +44,14 @@ def test_open():
     --------
 
     """
-    test_path = "test_NPD_file.xlsx"
+    file_path = os.getenv('filename')
+    test_path = file_path
     
     # using pandas
-    tracker_df = pd.read_excel(test_path, sheet_name=0, skiprows=3, header=0)
-    tc_df = pd.read_excel(test_path, sheet_name=1)
-    tracker_df.info()
-    tc_df.info()
+    tracker_df = pd.read_excel(test_path, sheet_name=1, skiprows=3, header=0)
+    tc_df = pd.read_excel(test_path, sheet_name=2)
+    #tracker_df.info()
+    #tc_df.info()
     print(tracker_df.head(2), tc_df.head(2))
 
     print("test file opened successfully")
