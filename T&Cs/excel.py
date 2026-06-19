@@ -7,6 +7,14 @@ import pandas as pd
 from dict import mechanic_dict, brand_dict
 import os
 
+def assign_mechanic(row):
+    """
+    Decides promo mechanic type for dict for a single row, using regex
+    """
+
+    
+    return mechanic, threshold
+
 def get_data(df):
     """
     Function that opens NPD file, reads the Promo & GWP Status Tracker tab, and extracts relevant info 
@@ -35,16 +43,10 @@ def get_data(df):
     end_date = df.at[row_no, 'PLANNED END  DATE (00:00)']
     promo_type = df.at[row_no, 'PROMOTION TYPE']
 
-    # pull mechanic with regex. read promotion type/mechanic columns
-    if promo_type == "% OFF":
-        mechanic = "% OFF"
-        # threshold = 
-    # if see WYS :
-    threshold = "when you spend £65 online" # pull 
-    # else :
-    # threshold = "when you buy online"
+    mechanic, threshold = df.apply(assign_mechanic, axis=1)
+    # NEED if threshold empty then no impact on sentence
 
-    # all variables in 'tags' dict, for next functions 
+    # all tags in a dict, for next functions 
     tags = {
         "ID": ID,
         "month": month,
@@ -69,7 +71,7 @@ def write_tc(tags):
     Returns:
     --------
     """
-    # extract all tags
+    # extract tags
     brand = tags.get("brand")
     mechanic = tags.get("mechanic")
     threshold = tags.get("threshold")
@@ -123,6 +125,10 @@ def upload_tc(tags):
     long_tc = tags.get("long tc")
     short_tc = tags.get("short tc")
 
+    # clean tags
+    end_date = end_date.strftime("%Y-%m-%d")
+    start_date = start_date.strftime("%Y-%m-%d")
+
     # my_df = pd.DataFrame(columns=["ID", "Month", "Brand", "start_date", "end_date", "Short T&Cs", "Long T&Cs"])
     
 
@@ -142,8 +148,9 @@ def upload_tc(tags):
     print(my_df.head(2))
 
     # Excel writer
+    file_path = os.getenv('filename')
     writer = pd.ExcelWriter(
-        path= "test_NPD_file.xlsx",
+        path= file_path,
         engine='openpyxl',
         mode='a',                   
         if_sheet_exists='overlay'
