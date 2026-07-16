@@ -2,6 +2,13 @@ import pandas as pd
 import os
 import sys
 
+"""
+example .env contents
+RECIPIENTS = ""
+filename = "C:/Users/alex/OneDrive/Documents/EPOS (SOANA) Alex.xlsx"
+WEEK_NO = "26"
+"""
+
 def open_tracker():
     file_path = os.getenv('filename')
     print("got .env file path")
